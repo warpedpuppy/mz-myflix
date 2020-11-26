@@ -12,6 +12,20 @@ class MyFlixApplication extends React.Component {
   }
 }
 
+// class MyFlixApplication extends React.Component {
+
+//   constructor() {
+//     super();
+//   }
+//   render () {
+//     return <MainView/>;
+//   }
+
+//  componentDidMount(){
+
+//  }
+// }
+
 // Finds the app root
 const container = document.getElementsByClassName('app-container')[0];
 

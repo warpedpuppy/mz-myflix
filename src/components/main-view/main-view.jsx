@@ -7,23 +7,23 @@ export class MainView extends React.Component {
 
   constructor() {
     super();
-    this.state = {
+    this.state = { // Initialize the state to an empty object so we can destructure it later
       movies: null,
       selectedMovie: null
     };
   }
  // One of the "hooks" available in a React Component
  componentDidMount() {
-  //  axios.get('<my-api-endpoint/movies>')
-  //  .then(response => {
-  //   //  Assign the result to the state
-  //   this.setState({
-  //     movies: response.data
-  //   });
-  //  })
-  //  .catch(function(error){
-  //    console.log(error);
-  //  });
+   axios.get('<my-api-endpoint/movies>')
+   .then(response => {
+    //  Assign the result to the state
+    this.setState({
+      movies: response.data
+    });
+   })
+   .catch(function(error){
+     console.log(error);
+   });
  }
 
  onMovieClick(movie) {
@@ -39,13 +39,14 @@ export class MainView extends React.Component {
   if (!movies) return <div className='main-view' />; 
   return (
     <div className='main-view'> 
-    {selectedMovie
-      ? <MovieView movie={selectedMovie}/>
-      : movies.map(movie => (
-        <MovieCard key={movie._id} movie={movie} 
-        onClick= {movie => this.onMovieClick(movie)}/>
-      ))
-    }
+      {selectedMovie
+        ? <MovieView movie={selectedMovie}/>
+        : movies.map(movie => (
+          <MovieCard key={movie._id} 
+          movie={movie} 
+          onClick= {movie => this.onMovieClick(movie)}/>
+        ))
+      }
      </div>
   );
  }
