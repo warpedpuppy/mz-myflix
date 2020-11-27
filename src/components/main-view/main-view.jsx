@@ -4,7 +4,6 @@ import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
 
 export class MainView extends React.Component {
-
   constructor() {
     super();
     this.state = { // Initialize the state to an empty object so we can destructure it later
@@ -14,7 +13,7 @@ export class MainView extends React.Component {
   }
  // One of the "hooks" available in a React Component
  componentDidMount() {
-   axios.get('https://radiant-journey-16913.herokuapp.com/movies>')
+   axios.get('https://radiant-journey-16913.herokuapp.com/movies')
    .then(response => {
     //  Assign the result to the state
     this.setState({

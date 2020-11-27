@@ -25,7 +25,7 @@ export class MovieCard extends React.Component {
             variant='link'
             className='expand-movie'         
           >
-            Details
+            {/* Details */}
           </button>
         </Card.Body>
       </Card>     
