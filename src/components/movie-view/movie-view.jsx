@@ -12,10 +12,13 @@ export class MovieView extends React.Component {
 
   render () {
     const {movie, onClick} = this.props;
+    const {visible} = this.state
 
     if(!movie) return null;
+    if(!visible) return <MainView/>
 
     return(
+
       <div className='movie-view'>
         <img className='movie-poster' src= {movie.ImagePath} />
          <div className='movie-title'>
@@ -36,7 +39,6 @@ export class MovieView extends React.Component {
         </div>
 
         <div className='movie-view'>
-          {this.state.visible ? <MovieView /> : <MainView />}
           {<button onClick={() => {
             this.setState({visible: false})
           }}>
