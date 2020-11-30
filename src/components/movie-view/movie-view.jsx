@@ -13,6 +13,7 @@ export class MovieView extends React.Component {
   render () {
     const {movie, onClick} = this.props;
 
+    // next return wont run if this is true
     if(!movie) return null;
 
     return(
