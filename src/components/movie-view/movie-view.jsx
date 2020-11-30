@@ -1,21 +1,24 @@
 import React from 'react'; 
+import {MainView} from '../main-view/main-view';
 
 export class MovieView extends React.Component {
   
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      visible: true
+    };
   }
 
   render () {
-    const {movie} = this.props;
+    const {movie, onClick} = this.props;
 
     if(!movie) return null;
 
     return(
       <div className='movie-view'>
-        <img className='movie-poster' src={movie.ImagePath}/>
-        <div className='movie-title'>
+        <img className='movie-poster' src= {movie.ImagePath} />
+         <div className='movie-title'>
           <span className='label'>Title: </span>
           <span className='value'>{movie.Title}</span>
         </div>
@@ -25,15 +28,22 @@ export class MovieView extends React.Component {
         </div>
         <div className='movie-genre'>
           <span className='label'>Genre: </span>
-          <span className='value'>{movie.Genre}</span>
+          <span className='value'>{movie.Genre.Name}</span>
         </div>
         <div className='movie-director'>
           <span className='label'>Director: </span>
-          <span className='value'>{movie.Director}</span>
+          <span className='value'>{movie.Director.Name}</span>
         </div>
-        {/* <div className='main-view-btn'>
-          <button className='expand-movie'>Main Menu</button>
-        </div>         */}
+
+        <div className='movie-view'>
+          {this.state.visible ? <MovieView /> : <MainView />}
+          {<button onClick={() => {
+            this.setState({visible: false})
+          }}>
+            Home Page
+          </button>}
+        </div>
+        
       </div>
     );
   }
