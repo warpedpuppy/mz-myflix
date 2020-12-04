@@ -16,8 +16,8 @@ export class MainView extends React.Component {
   }
  // One of the hooks available in a React Component
  componentDidMount() {
-  axios.get('http://localhost:8080/movies')
-  //  axios.get('https://radiant-journey-16913.herokuapp.com/movies')
+  // axios.get('http://localhost:8080/movies')
+   axios.get('https://radiant-journey-16913.herokuapp.com/movies')
    .then(response => {
     //  Assign the result to the state
     this.setState({
@@ -65,22 +65,22 @@ export class MainView extends React.Component {
  }
 }
 
-MainView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired
-    }).isRequired,
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
-      Death: PropTypes.string
-    }).isRequired,
-    ImagePath: PropTypes.string.isRequired
-    // Featured: PropTypes.bool.isRequired
-  }).isRequired, 
-  onClick: PropTypes.func.isRequired
-};
+// MainView.propTypes = {
+//   movie: PropTypes.shape({
+//     Title: PropTypes.string.isRequired,
+//     Description: PropTypes.string.isRequired,
+//     Genre: PropTypes.shape({
+//       Name: PropTypes.string.isRequired,
+//       Description: PropTypes.string.isRequired
+//     }).isRequired,
+//     Director: PropTypes.shape({
+//       Name: PropTypes.string.isRequired,
+//       Bio: PropTypes.string.isRequired,
+//       Birth: PropTypes.string.isRequired,
+//       Death: PropTypes.string
+//     }).isRequired,
+//     ImagePath: PropTypes.string.isRequired
+//     // Featured: PropTypes.bool.isRequired
+//   }).isRequired, 
+//   onClick: PropTypes.func.isRequired
+// };
