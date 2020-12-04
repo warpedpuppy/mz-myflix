@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
 import {LoginView} from '../login-view/login-view';
+import{RegistrationView} from '../registration-view/registration-view';
 
 export class MainView extends React.Component {
+  
   constructor() {
     super();
     this.state = { // Initial state set to null
@@ -14,7 +16,8 @@ export class MainView extends React.Component {
       user: null
     };
   }
- // One of the hooks available in a React Component
+ 
+  // One of the hooks available in a React Component
  componentDidMount() {
   // axios.get('http://localhost:8080/movies')
    axios.get('https://radiant-journey-16913.herokuapp.com/movies')
@@ -36,6 +39,7 @@ export class MainView extends React.Component {
    });
  }
 
+ /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
  onLoggedIn(user) {
    this.setState ({
      user
@@ -52,9 +56,14 @@ export class MainView extends React.Component {
  render() {   
   // If the state isn't initialized, this will throw on runtime before the data is initially loaded
   const {movies, selectedMovie, user} = this.state;
+
+  // Registration component
+  // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
     // /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView*/
-  if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-  // Before the movies have been loaded
+  
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+ 
+    // Before the movies have been loaded
   if (!movies) return <div className='main-view' />; 
 
   return ( /*If the state of `selectedMovie` is not null, that selected movie will be returned. otherwise, all movies will be returned*/
@@ -72,21 +81,30 @@ export class MainView extends React.Component {
  }
 }
 
-MainView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired
-    }).isRequired,
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
-      Death: PropTypes.string
-    }).isRequired,
-    ImagePath: PropTypes.string.isRequired
-    // Featured: PropTypes.bool.isRequired
-  }).isRequired 
-};
+// MainView.propTypes = {
+//   movie: PropTypes.shape({
+//     Title: PropTypes.string.isRequired,
+//     Description: PropTypes.string.isRequired,
+//     Genre: PropTypes.shape({
+//       Name: PropTypes.string.isRequired,
+//       Description: PropTypes.string.isRequired
+//     }).isRequired,
+//     Director: PropTypes.shape({
+//       Name: PropTypes.string.isRequired,
+//       Bio: PropTypes.string.isRequired,
+//       Birth: PropTypes.string.isRequired,
+//       Death: PropTypes.string
+//     }).isRequired,
+//     ImagePath: PropTypes.string.isRequired
+//     // Featured: PropTypes.bool.isRequired
+//   }).isRequired 
+// };
+
+// MainView.propTypes = {
+//   movies: PropTypes.shape({
+//     Title: PropTypes.string.isRequired,
+//     Description: PropTypes.string.isRequired,
+//     ImagePath: PropTypes.string.isRequired
+//   }).isRequired,
+//   returnHome: PropTypes.func.isRequired
+// };
