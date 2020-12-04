@@ -17,10 +17,6 @@ export class MovieCard extends React.Component {
           <Button onClick={() => onClick(movie)} variant='link'>Open</Button>
         </Card.Body>
       </Card>
-
-      // <div onClick={() => onClick(movie)} className="movie-card">
-      //   {movie.Title}
-      // </div>
     );
   }
 }
@@ -44,3 +40,12 @@ export class MovieCard extends React.Component {
 //   }).isRequired, 
 //   onClick: PropTypes.func.isRequired
 // };
+
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
+};
