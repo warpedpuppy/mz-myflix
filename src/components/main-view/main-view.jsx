@@ -42,6 +42,13 @@ export class MainView extends React.Component {
    });
  }
 
+ returnHome = (e) => {
+   e.preventDefault()
+   this.setState({
+     selectedMovie: undefined
+   });
+ }
+
  render() {   
   // If the state isn't initialized, this will throw on runtime before the data is initially loaded
   const {movies, selectedMovie, user} = this.state;
@@ -53,7 +60,7 @@ export class MainView extends React.Component {
   return ( /*If the state of `selectedMovie` is not null, that selected movie will be returned. otherwise, all movies will be returned*/
     <div className='main-view'> 
       {selectedMovie
-        ? <MovieView movie={selectedMovie}/>
+        ? <MovieView returnHome={this.returnHome} movie={selectedMovie}/>
         : movies.map(movie => (
           <MovieCard key={movie._id} 
           movie={movie} 
@@ -65,22 +72,21 @@ export class MainView extends React.Component {
  }
 }
 
-// MainView.propTypes = {
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string.isRequired,
-//     Description: PropTypes.string.isRequired,
-//     Genre: PropTypes.shape({
-//       Name: PropTypes.string.isRequired,
-//       Description: PropTypes.string.isRequired
-//     }).isRequired,
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string.isRequired,
-//       Bio: PropTypes.string.isRequired,
-//       Birth: PropTypes.string.isRequired,
-//       Death: PropTypes.string
-//     }).isRequired,
-//     ImagePath: PropTypes.string.isRequired
-//     // Featured: PropTypes.bool.isRequired
-//   }).isRequired, 
-//   onClick: PropTypes.func.isRequired
-// };
+MainView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired
+    }).isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Birth: PropTypes.string.isRequired,
+      Death: PropTypes.string
+    }).isRequired,
+    ImagePath: PropTypes.string.isRequired
+    // Featured: PropTypes.bool.isRequired
+  }).isRequired 
+};

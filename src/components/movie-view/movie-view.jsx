@@ -1,23 +1,13 @@
 import React from 'react'; 
 import PropTypes from 'prop-types';
-import {MainView} from '../main-view/main-view';
 
 export class MovieView extends React.Component {
-  
-  constructor() {
-    super();
-    this.state = {
-      visible: true
-    };
-  }
 
   render () {
-    const {movie, onClick} = this.props;
-    const {visible} = this.state
+    const {movie, returnHome} = this.props;
 
     // next return wont run if this is true
     if(!movie) return null;
-    if(!visible) return <MainView/>
 
     return(
 
@@ -41,9 +31,8 @@ export class MovieView extends React.Component {
         </div>
 
         <div className='movie-view'>
-          {<button onClick={() => {
-            this.setState({visible: false})
-          }}>
+          {<button onClick={(e) => 
+            returnHome(e)}>
             Home Page
           </button>}
         </div>
@@ -53,22 +42,22 @@ export class MovieView extends React.Component {
   }
 }
 
-// MovieView.propTypes = {
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string.isRequired,
-//     Description: PropTypes.string.isRequired,
-//     Genre: PropTypes.shape({
-//       Name: PropTypes.string.isRequired,
-//       Description: PropTypes.string.isRequired
-//     }).isRequired,
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string.isRequired,
-//       Bio: PropTypes.string.isRequired,
-//       Birth: PropTypes.string.isRequired,
-//       Death: PropTypes.string
-//     }).isRequired,
-//     ImagePath: PropTypes.string.isRequired
-//     // Featured: PropTypes.bool.isRequired
-//   }).isRequired, 
-//   onClick: PropTypes.func.isRequired
-// };
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired
+    }).isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Birth: PropTypes.string.isRequired,
+      Death: PropTypes.string
+    }).isRequired,
+    ImagePath: PropTypes.string.isRequired
+    // Featured: PropTypes.bool.isRequired
+  }).isRequired, 
+  returnHome: PropTypes.func.isRequired
+};
