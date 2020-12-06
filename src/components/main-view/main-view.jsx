@@ -86,19 +86,6 @@ export class MainView extends React.Component {
       ))
       }
       </div>
-      
-      // <Container className='main-view'>
-      //     <Row>
-      //       <Col>
-      //           movies.map(movie => (
-      //           <MovieCard key={movie._id} 
-      //           movie={movie} 
-      //           onClick= {movie => this.onMovieClick(movie)} /> 
-      //           ))   
-      //       </Col>
-      //     </Row>
-      // </Container>
-
     );
   }
 }
