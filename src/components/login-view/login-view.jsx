@@ -1,6 +1,11 @@
 import React, {useState} from 'react'; 
 import PropTypes from 'prop-types';
 import{RegistrationView} from '../registration-view/registration-view';
+import { 
+  Container, Row, Col, Form, FormGroup, Label, Input
+} from 'react-bootstrap';
+
+import Button from 'react-bootstrap/Button';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState(''); 
@@ -13,25 +18,24 @@ export function LoginView(props) {
      props.onLoggedIn(username);
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-
-  };
-
   return (
-    <form>
-      <label>
-        Username:
-        <input type='text' value={username} onChange = {e => 
-        setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type='password' value={password} onChange = {e => 
-        setPassword(e.target.value)} />
-      </label>
-      <button type='button' onClick={handleSubmit}>Submit</button>
-      <button type='button'>New User</button>
-    </form>
+    <Form className='login-form'>
+      <FormGroup>
+        <label>
+          <input className='user-input' type='text' value={username} placeholder='Username' onChange = {e => 
+          setUsername(e.target.value)} />
+        </label>
+      </FormGroup>
+      <FormGroup>
+        <label>
+          <input className='password-input' type='password' value={password} placeholder='Password' onChange = {e => 
+          setPassword(e.target.value)} />
+        </label>
+      </FormGroup>
+      <FormGroup>
+        <Button className='login-button' type='button' onClick={handleSubmit}>LOGIN</Button>
+        <Button className='register-button' type='button'>NEW USER</Button>
+      </FormGroup>
+    </Form>
   );
 }
