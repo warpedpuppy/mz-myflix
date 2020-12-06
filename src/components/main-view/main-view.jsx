@@ -6,6 +6,10 @@ import {MovieView} from '../movie-view/movie-view';
 import {LoginView} from '../login-view/login-view';
 import{RegistrationView} from '../registration-view/registration-view';
 
+import Button from 'react-bootstrap/Button';
+import {Container, Grid, Row, Col} from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+
 export class MainView extends React.Component {
   
   constructor() {
@@ -59,52 +63,51 @@ export class MainView extends React.Component {
 
   // Registration component
   // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
-    // /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView*/
+   
+  // /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView*/
   
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
  
     // Before the movies have been loaded
-  if (!movies) return <div className='main-view' />; 
+    if (!movies) return <div className='main-view' />; 
 
-  return ( /*If the state of `selectedMovie` is not null, that selected movie will be returned. otherwise, all movies will be returned*/
-    <div className='main-view'> 
+    // if (selectedMovie) return <MovieView returnHome={this.returnHome} movie={selectedMovie}/>
+   
+    return ( /*If the state of `selectedMovie` is not null, that selected movie will be returned. otherwise, all movies will be returned*/
+      <div className='main-view'> 
       {selectedMovie
-        ? <MovieView returnHome={this.returnHome} movie={selectedMovie}/>
-        : movies.map(movie => (
-          <MovieCard key={movie._id} 
-          movie={movie} 
-          onClick= {movie => this.onMovieClick(movie)}/>
-        ))
+        ? 
+        <MovieView returnHome={this.returnHome} movie={selectedMovie}/>
+        : 
+        movies.map(movie => (
+        <MovieCard key={movie._id} 
+        movie={movie} 
+        onClick= {movie => this.onMovieClick(movie)}/>
+      ))
       }
-     </div>
-  );
- }
+      </div>
+      
+      // <Container className='main-view'>
+      //     <Row>
+      //       <Col>
+      //           movies.map(movie => (
+      //           <MovieCard key={movie._id} 
+      //           movie={movie} 
+      //           onClick= {movie => this.onMovieClick(movie)} /> 
+      //           ))   
+      //       </Col>
+      //     </Row>
+      // </Container>
+
+    );
+  }
 }
 
-// MainView.propTypes = {
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string.isRequired,
-//     Description: PropTypes.string.isRequired,
-//     Genre: PropTypes.shape({
-//       Name: PropTypes.string.isRequired,
-//       Description: PropTypes.string.isRequired
-//     }).isRequired,
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string.isRequired,
-//       Bio: PropTypes.string.isRequired,
-//       Birth: PropTypes.string.isRequired,
-//       Death: PropTypes.string
-//     }).isRequired,
-//     ImagePath: PropTypes.string.isRequired
-//     // Featured: PropTypes.bool.isRequired
-//   }).isRequired 
-// };
+MainView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired
+  }).isRequired,
+};
 
-// MainView.propTypes = {
-//   movies: PropTypes.shape({
-//     Title: PropTypes.string.isRequired,
-//     Description: PropTypes.string.isRequired,
-//     ImagePath: PropTypes.string.isRequired
-//   }).isRequired,
-//   returnHome: PropTypes.func.isRequired
-// };
