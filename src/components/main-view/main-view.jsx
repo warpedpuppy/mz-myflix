@@ -90,11 +90,4 @@ export class MainView extends React.Component {
   }
 }
 
-MainView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired,
-};
 
