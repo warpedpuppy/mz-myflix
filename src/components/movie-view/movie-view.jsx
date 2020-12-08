@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
 export class MovieView extends React.Component {
 
   render () {
-    const {movie, returnHome} = this.props;
+    const {movie} = this.props; //returnHome
 
     // next return wont run if this is true
     if(!movie) return null;
@@ -30,6 +31,17 @@ export class MovieView extends React.Component {
         <div className='movie-director'>
           <span className='label'><h3>Director</h3> </span>
           <span className='value'>{movie.Director.Name}</span>
+        </div>
+
+        <div>
+          <Link to={`/directors/${movie.Director.Name}`}>
+            <Button variant='link'>Director</Button>          
+          </Link>
+        </div>
+        <div>
+          <Link to={`genres/${movie.Genre.Name}`}>
+            <Button variant='link'>Genre</Button>
+          </Link>
         </div>
 
         <div className='movie-view'>
@@ -60,5 +72,5 @@ MovieView.propTypes = {
     }).isRequired,
     ImagePath: PropTypes.string.isRequired
   }).isRequired,
-  returnHome: PropTypes.func.isRequired
+  // returnHome: PropTypes.func.isRequired
 };

@@ -16,10 +16,9 @@ export function LoginView(props) {
     
     // Send a request to the server for authentication
     axios.post('https://radiant-journey-16913.herokuapp.com/login', {
-      Username: username,
-      Password: password
-
-      // props.onLoggedIn(username)
+      Username: username, /* test111 */
+      Password: password  /* $test111 */
+ 
     })
     .then (response => {
       const data = response.data;
