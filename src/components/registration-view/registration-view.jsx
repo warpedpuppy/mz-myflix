@@ -1,5 +1,5 @@
 import React, {useState} from 'react'; 
-
+import axios from 'axios';
 import { 
   Container, Row, Col, Form, FormGroup, Label, Input, Button
 } from 'react-bootstrap';
@@ -14,6 +14,21 @@ export function RegistrationView(props) {
     e.preventDefault(); 
     console.log(username, password, email, birthday);
     props.onLoggedIn(username);
+
+    axios.post('https://radiant-journey-16913.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+    })
+    .catch(e => {
+      console.log('error registering user')
+    });
   }
 
   return (
