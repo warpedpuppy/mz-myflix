@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
+import {Container, Grid, Row, Col} from 'react-bootstrap/Container';
 
 export class MovieView extends React.Component {
 
@@ -35,42 +36,42 @@ export class MovieView extends React.Component {
 
         <div>
           <Link to={`/directors/${movie.Director.Name}`}>
-            <Button variant='link'>Director</Button>          
+            <Button className='movie-view-button' variant='link'>DIRECTOR</Button>          
           </Link>
         </div>
         <div>
           <Link to={`genres/${movie.Genre.Name}`}>
-            <Button variant='link'>Genre</Button>
+            <Button className='movie-view-button' variant='link'>GENRE</Button>
           </Link>
         </div>
 
         <div className='movie-view'>
-          {<Button className='movie-view-button' onClick={(e) => 
-            returnHome(e)}>
-            Home Page
-          </Button>}
+          <Link to = {`/`}>
+            <Button className='movie-view-button' variant='link'>HOME</Button>
+          </Link>
         </div>
+
       </div>
     );
   }
 }
 
 
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string
-    }).isRequired,
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string,
-      Death: PropTypes.string
-    }).isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired,
-  // returnHome: PropTypes.func.isRequired
-};
+// MovieView.propTypes = {
+//   movie: PropTypes.shape({
+//     Title: PropTypes.string.isRequired,
+//     Description: PropTypes.string.isRequired,
+//     Genre: PropTypes.shape({
+//       Name: PropTypes.string.isRequired,
+//       Description: PropTypes.string
+//     }).isRequired,
+//     Director: PropTypes.shape({
+//       Name: PropTypes.string.isRequired,
+//       Bio: PropTypes.string.isRequired,
+//       Birth: PropTypes.string,
+//       Death: PropTypes.string
+//     }).isRequired,
+//     ImagePath: PropTypes.string.isRequired
+//   }).isRequired,
+//   returnHome: PropTypes.func.isRequired
+// };

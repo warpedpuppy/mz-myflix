@@ -54,6 +54,17 @@ $font: 'Oxygen', sans-serif;
 .register-button:hover {
   color: $main-color;
   background-color: $second-color;
+  text-decoration: none;
+}
+
+.nav-button {
+  color: $main-color;
+  background-color: $second-color;
+  text-decoration: none;
+}
+
+.nav-button:hover {
+  text-decoration: none;
 }
 
 .movie-card-button {

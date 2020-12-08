@@ -4,6 +4,7 @@ import{RegistrationView} from '../registration-view/registration-view';
 import { 
   Button, Container, Row, Col, Form, FormGroup, Label, Input
 } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 
 export function LoginView(props) {
@@ -45,7 +46,9 @@ export function LoginView(props) {
       </FormGroup>
       <FormGroup>
         <Button className='login-button' type='button' onClick={handleSubmit}>LOGIN</Button>
-        <Button className='register-button' type='button'>NEW USER</Button>
+        <Link to = {`/register`}>
+          <Button className='register-button' variant='link'>NEW USER</Button>
+        </Link>
       </FormGroup>
     </Form>
   );

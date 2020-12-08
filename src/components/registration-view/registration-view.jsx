@@ -13,7 +13,7 @@ export function RegistrationView(props) {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     console.log(username, password, email, birthday);
-    props.onLoggedIn(username);
+    // props.onLoggedIn(username);  // Why do I need this? Works fine without it
 
     axios.post('https://radiant-journey-16913.herokuapp.com/users', {
       Username: username,
@@ -24,7 +24,7 @@ export function RegistrationView(props) {
     .then(response => {
       const data = response.data;
       console.log(data);
-      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+      window.open('/', '_self'); // '_self' is necessary so that the page will open in the current tab
     })
     .catch(e => {
       console.log('error registering user')
@@ -34,31 +34,31 @@ export function RegistrationView(props) {
   return (
     <Form className='login-form'>
       <FormGroup>
-        <label>
-          <input type='text' value={username} placeholder='Username' onChange = {e => 
+        <Form.Label>
+          <Form.Control type='text' value={username} placeholder='Username' onChange = {e => 
           setUsername(e.target.value)} />
-        </label>
+        </Form.Label>
       </FormGroup>
       <FormGroup>
-        <label>
-          <input type='password' value={password} placeholder='Password' onChange = {e => 
+        <Form.Label>
+          <Form.Control type='password' value={password} placeholder='Password' onChange = {e => 
           setPassword(e.target.value)} />
-        </label>
+        </Form.Label>
       </FormGroup>
       <FormGroup>
-        <label>
-          <input type='email' value={email} placeholder='Email' onChange = {e => 
+        <Form.Label>
+          <Form.Control type='email' value={email} placeholder='Email' onChange = {e => 
           setEmail(e.target.value)} />
-        </label>
+        </Form.Label>
       </FormGroup>
       <FormGroup>
-        <label>
-          <input type='date' value={birthday} placeholder='Birthday' onChange = {e => 
+        <Form.Label>
+          <Form.Control type='date' value={birthday} placeholder='Birthday' onChange = {e => 
           setBirthday(e.target.value)} />
-        </label>
+        </Form.Label>
       </FormGroup>
       <FormGroup>
-        <button className='login-button' type='button' onClick={handleSubmit}>REGISTER</button>
+        <Button className='login-button' type='button' onClick={handleSubmit}>REGISTER</Button>
       </FormGroup>
     </Form>
   );
