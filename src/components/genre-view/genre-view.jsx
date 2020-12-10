@@ -17,6 +17,8 @@ export class GenreView extends React.Component {
 
     if(!movie) return null;
 
+    console.log('movie = ', movie);
+
     return (
       <div className= 'genre-view'>
         <Container>
