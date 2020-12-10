@@ -37,6 +37,8 @@ export class MainView extends React.Component {
    }
  }
 
+ 
+
 //  When a movie is clicked, this function is called and updated the state of the SelectedMovie property to that movie
 //  onMovieClick(movie) {
 //    this.setState({
@@ -71,13 +73,15 @@ export class MainView extends React.Component {
    this.getMovies(authData.token);
  }
 
- onLoggedOut() {
-   localStorage.removeItem('token');
-   localStorage.removeItem('user');
-   this.setState({
-     user: null
-   })
- }
+  onLoggedOut = () => {
+    // e.preventDefault();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+  }
+
 
 //  returnHome = (e) => {
 //    e.preventDefault()
@@ -110,8 +114,8 @@ export class MainView extends React.Component {
           <Button className='nav-button' variant='link'>HOME</Button>
         </Link>
         <Link to = {`/`}>
-          <Button className='nav-button' variant='link' //onClick=
-          >Logout</Button>
+          <Button className='nav-button' variant='link' onClick={this.onLoggedOut.bind(this)}
+          >LOGOUT</Button>
         </Link>
           <Route exact path='/' render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
@@ -119,19 +123,22 @@ export class MainView extends React.Component {
           }} />
           <Route path='/register' render={() => <RegistrationView /> 
           } />
-          <Route path='/profile' render={() => <ProfileView/ >
+          <Route path='/profile' render={() => {
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            return <ProfileView/ >
+          }
           } />
           <Route exact path='/movies/:movieId' render={
             ({match}) => <MovieView movie={movies.find(
             m => m._id === match.params.movieId)}/> 
           } />
           <Route exact path='/genres/:name' render={({match}) => {
-            if (!movies) <div className='main-view' />;
+            if (!movies) return <div className='main-view' />;
             return <GenreView genre={movies.find(m =>
             m.Genre.Name === match.params.name).Genre} /> }
           } />
           <Route exact path='/directors/:name' render={({match}) => {
-            if (!movies) <div className='main-view' />; 
+            if (!movies) return <div className='main-view' />; 
             return <DirectorView director={movies.find(m => 
             m.Director.Name === match.params.name).Director} />}
           } />
