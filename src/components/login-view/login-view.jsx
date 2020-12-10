@@ -14,6 +14,12 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password);
+
+  const onLoggedOut = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
     
     // Send a request to the server for authentication
     axios.post('https://radiant-journey-16913.herokuapp.com/login', {
