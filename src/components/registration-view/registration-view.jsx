@@ -9,6 +9,10 @@ export function RegistrationView(props) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+  
+  const usernameError = useState('Username must be at least 5 characters long');
+  const passwordError = useState('Password must be at least 6 characters long');
+  const emailError = useState('Invalid email');
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
@@ -32,25 +36,28 @@ export function RegistrationView(props) {
   }
 
   return (
-    <Form className='login-form'>
+    <Form className='login-form' noValidate>
       <FormGroup>
         <Form.Label>
           <Form.Control type='text' value={username} placeholder='Username' onChange = {e => 
           setUsername(e.target.value)} />
         </Form.Label>
       </FormGroup>
+        <div style={{fontSize: 12, color: 'red'}}>{usernameError}</div>
       <FormGroup>
         <Form.Label>
           <Form.Control type='password' value={password} placeholder='Password' onChange = {e => 
           setPassword(e.target.value)} />
         </Form.Label>
       </FormGroup>
+      <div style={{fontSize: 12, color: 'red'}}>{passwordError}</div>
       <FormGroup>
         <Form.Label>
           <Form.Control type='email' value={email} placeholder='Email' onChange = {e => 
           setEmail(e.target.value)} />
         </Form.Label>
       </FormGroup>
+      <div style={{fontSize: 12, color: 'red'}}>{emailError}</div>
       <FormGroup>
         <Form.Label>
           <Form.Control type='date' value={birthday} placeholder='Birthday' onChange = {e => 
