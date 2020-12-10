@@ -10,9 +10,9 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
   
-  // const [usernameError, setUsernameError] = useState({});
-  // const [passwordError, setPasswordError] = useState({});
-  // const [emailError, setEmailError] = useState({});
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
