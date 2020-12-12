@@ -17,10 +17,10 @@ export function RegistrationView(props) {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     console.log(username, password, email, birthday);
-    // const isValid = formValidation();
+    const isValid = formValidation();
     // props.onLoggedIn(username);  // Why do I need this? Works fine without it
 
-    // if(isValid) {     
+    if(isValid) {     
       axios.post('https://radiant-journey-16913.herokuapp.com/users', {
         Username: username,
         Password: password,
@@ -36,35 +36,37 @@ export function RegistrationView(props) {
       .catch(e => {
         console.log('error registering user')
       });
-    // }; 
+    };
+  } 
+
+  const formValidation = () => {
+    let usernameError = '';
+    let passwordError = ''; 
+    let emailError = ''; 
+      
+    let isValid = true; 
+
+    if (username.length < 5) {
+      usernameError = 'Username must be at least 5 characters';
+      isValid = false;
+    }
+
+    if (password.length < 6) {
+      passwordError = 'Password must be at least 6 characters'; 
+      isValid = false; 
+    }
+
+    if (!email.includes('.') && !email.includes('@')) {
+      emailError = 'email invalid'
+      isValid = false;
+    }
+
+    setUsernameError(usernameError); 
+    setPasswordError(passwordError); 
+    setEmailError(emailError);
+    return isValid;
   }
-
-  // const formValidation = () => {
-  //   const usernameError = {};
-  //   const passwordError = {}; 
-  //   const emailError = {}; 
-    
-  //   let isValid = true; 
-
-  //   if (username.length < 5) {
-  //     usernameError = 'Username must be at least 5 characters';
-  //     isValid = false;
-  //   }
-
-  //   if (password.length < 6) {
-  //     passwordError = 'Password must be at least 6 characters'; 
-  //     isValid = false; 
-  //   }
-
-  //   if (!email.includes('.') && !email.includes('@')) {
-  //     emailError = 'email invalid'
-  //   }
-
-  //   setUsernameError(usernameError); 
-  //   setPasswordError(passwordError); 
-  //   setEmailError(emailError);
-  //   return isValid;
-  // }
+  
 
   return (
     <Form className='login-form'>
