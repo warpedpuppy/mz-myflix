@@ -37,6 +37,31 @@ $font: 'Oxygen', sans-serif;
   border-style: 2px solid $second-color;
 }
 
+.back-button {
+  margin: 5px;
+  background-color: $main-color;
+  font-family: $font;
+  font-weight: bold;
+  color: $second-color;
+  width: 160px;
+  border-style: 2px solid $second-color;
+}
+
+.back-button {
+  margin: 5px;
+  background-color: $main-color;
+  font-family: $font;
+  font-weight: bold;
+  color: $second-color;
+  width: 200px;
+  border-style: 2px solid $second-color;
+}
+
+.back-button:hover {
+  text-decoration: none;
+  color: $second-color;
+}
+
 .register-button {
   margin: 5px;
   background-color: $second-color;
