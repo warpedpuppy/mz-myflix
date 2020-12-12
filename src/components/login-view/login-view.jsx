@@ -11,30 +11,43 @@ export function LoginView(props) {
   const [ username, setUsername ] = useState(''); 
   const [ password, setPassword ] = useState('');
 
+  const [userError, setUserError] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password);
+    const isValid = formValidation();
 
-  const onLoggedOut = (e) => {
-    e.preventDefault();
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-  }
-    
     // Send a request to the server for authentication
-    axios.post('https://radiant-journey-16913.herokuapp.com/login', {
-      Username: username, /* test111 */
-      Password: password  /* $test111 */
- 
-    })
-    .then (response => {
-      const data = response.data;
-      props.onLoggedIn(data);
-    })
-    .catch(e => {
-      console.log('user doesnt exist')
-    });    
-  };
+    if (isValid) {
+      axios.post('https://radiant-journey-16913.herokuapp.com/login', {
+        Username: username, /* test111 */
+        Password: password  /* $test111 */   
+      })
+      .then (response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('user doesnt exist');
+        alert('Invalid username or password');
+      }); 
+    };
+  }
+
+  const formValidation = () => {
+    let userError = ''; 
+    let isValid = true; 
+
+    // LINE BELOW DOESNT WORK (USERNAME !== USERNAME || PASSWORD !== PASSWORD)
+    // if (username !== username || password !== password ) {
+    //   userError = 'invalid username or password';
+    //   isValid = false;
+    // }
+
+    setUserError(userError); 
+    return isValid;
+  }
 
   return (
     <Form className='login-form'>
@@ -44,12 +57,16 @@ export function LoginView(props) {
           setUsername(e.target.value)} />
         </Form.Label>
       </FormGroup>
+      
       <FormGroup controlId='FormBasicPassword'>
         <Form.Label>
           <Form.Control className='password-input' type='password' value={password} placeholder='Password' onChange = {e => 
           setPassword(e.target.value)} />
         </Form.Label>
       </FormGroup>
+      
+      <div style={{fontSize: 12, color: 'red'}}>{userError}</div>
+      
       <FormGroup>
         <Button className='login-button' type='button' onClick={handleSubmit}>LOGIN</Button>
         <Link to = {`/register`}>
