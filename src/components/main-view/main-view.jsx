@@ -11,8 +11,9 @@ import {ProfileView} from '../profile-view/profile-view';
 import PropTypes from 'prop-types';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import {Container, Grid, Row, Col} from 'react-bootstrap/Container';
+import {Container, Grid, Row, Col} from 'react-bootstrap/Container'
 import {Navbar} from 'react-bootstrap/Navbar';
+
 import { Link } from "react-router-dom";
 
 export class MainView extends React.Component {
@@ -93,11 +94,6 @@ export class MainView extends React.Component {
  render() {   
   // If the state isn't initialized, this will throw on runtime before the data is initially loaded
   const {movies, selectedMovie, user} = this.state;
-
-  // Registration component
-  // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
-   
-  // /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView*/
  
     // Before the movies have been loaded
     if (!movies) return <div className='main-view' />; 
