@@ -8,100 +8,113 @@ import {Link} from 'react-router-dom';
 
 export class ProfileView extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super();
 
-    this.username = undefined;
-    this.password = undefined;
-    this.email = undefined;
+  this.Username = undefined;
+  this.Password = undefined;
+  this.Email = undefined;
 
-    this.state = {
-      user: null,
-      username: '',
-      password: '',
-      email: '',
-      favouriteMovies: []
+  this.state = {
+    user: null,
+    Username: '',
+    Password: '',
+    Email: '',
+    Birthday: null,
+    FavouriteMovies: []
     };
   }
 
   componentDidMount() {
-    const accessToken = localStorage.getItem('token');
-    this.getUser(accessToken);
+    
+    const getToken = localStorage.getItem('token');
+    this.getUser(getToken);
   }
 
   getUser(token) {
-    const username = localStorage.getItem('user');
 
-    axios.get(`https://radiant-journey-16913.herokuapp.com/users/:username`, { //${username}
-      headers: { Authorization: `Bearer ${token}`},
+    const user = localStorage.getItem('user');
+
+    axios.get(`https://radiant-journey-16913.herokuapp.com/users/${user}`, {
+      headers: {Authorization: `Bearer ${token}`},
     })
     .then((response) => {
       this.setState({
-        username: response.data.username,
-        password: response.data.password,
-        email: response.data.email,
-        favouriteMovies: response.data.favouriteMovies
+        username: response.data.Username,
+        password: response.data.Password,
+        email: response.data.Email,
+        birthday: response.data.Birthday,
+        favouriteMovies: response.data.FavouriteMovies
       });
     })
-    .catch (function (error) {
+    .catch(function(error) {
       console.log(error);
     });
   }
 
+  // UPDATE USER INFO ---------------------------------------------------------------
+
   handleUpdate = (e) => {
 
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user'); 
+    const token = localStorage.getItem('token'); 
 
-    axios.put(`https://radiant-journey-16913.herokuapp.com/users/:username`, {
-      username: this.username,
-      password: this.password,
-      email: this.email
+    axios.put(`https://radiant-journey-16913.herokuapp.com/users/${user}`, {
+      username: this.Username,
+      password: this.Password,
+      email: this.Email,
+      birthday: this.Birthday
     },
-    { headers: {Authorization: `Bearer ${token}`},
+    {
+      headers: {Authorization: `Bearer ${token}`},
     })
     .then((response) => {
       const data = response.data;
-      localStorage.setItem('user', data.username);
-      window.open('/users', '_self');
-      console.log('Succesful update');
+      localStorage.setItem('user', data.Username);
+      window.open('/users', '_self'); 
+      console.log('successful update');
     })
     .catch((e) => {
       console.log(e);
     });
   };
 
-  handleDeregistration = (e) => {
+  // DEREGISTER USER -----------------------------------------------------------------
 
-    const username = localStorage.getItem('user');
+  handleDeregistering = (e) => {
+
+    const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios.delete(`https://radiant-journey-16913.herokuapp.com/users/:username`, {
-      headers: {Authorization: `Bearer ${token}`},
+    axios.delete(`https://radiant-journey-16913.herokuapp.com/users/${user}`, {
+      headers: {Authorization: `Bearer ${token}`}, 
     })
     .then((response) => {
       const data = response.data;
-      window.open('/', '_self');
-      console.log('Succesful deregister');
+      window.open('/', '_self'); 
+      alert('Account deleted succesfully');
     })
     .catch((e) => {
-      console.log('unable to deregister')
+      alert('error deregistering user');
     });
 
     this.setState({
       user: null
     });
+
     localStorage.removeItem('user');
     localStorage.removeItem('token');
   };
 
-  removeItem(movie) {
+  // Remove movie from favourite movies -----------------------------------------------
 
-    const username = localStorage.getItem('user');
+  removeMovie(movie) {
+
+    const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios.delete(`https://radiant-journey-16913.herokuapp.com/users/:username/movies/:movie`, { //${movie}
-      headers: {Authorization: `Bearer ${token}`},
+    axios.delete(`https://radiant-journey-16913.herokuapp.com/users/${user}/movies/${movie._id}`, {
+      headers: {Authorization: `Bearer ${token}`}, 
     })
     .then((response) => {
       this.setState({
@@ -109,39 +122,103 @@ export class ProfileView extends React.Component {
       });
     })
     .catch(function (error) {
-      console.log(error)
+      console.log(error); 
     });
-    console.log('movie removed from favourite movies'); 
+    console.log('movie removed from favourite movies')
   }
 
   setUsername(input) {
-    this.username = input;
+    this.Username = input;
   }
 
   setPassword(input) {
-    this.password = input;
+    this.Password = input;
   }
 
   setEmail(input) {
-    this.email = input;
+    this.Email = input; 
+  }
+
+  setBirthday(input) {
+    this.Birthday = input;
   }
 
   render() {
 
-    const movies = this.props.movies; 
-    const username = this.state.username, 
-      email = this.state.email,
-      favouriteMovies = this.state.favouriteMovies;
+   const movies = this.props.movies;
+   const user = this.state.Username,
+         favouriteMovies = this.state.FavouriteMovies; 
 
     console.log(favouriteMovies);
 
     return (
 
-      <div className='profile-view'>
-        
-      </div>
+      <div className = 'profile-view'>
+        <Container>
+          <CardGroup>
+            <Card>
+              <h3>{this.state.username}</h3>
+              <h5>{this.state.email}</h5>
+              <Button className='delete-button' onClick={() => this.handleDeregistering()}>DELETE ACCOUNT</Button>
+            </Card>
 
+            <Card>
+              <h3>Edit Profile</h3>
+              <Form.Group>
+                <Form.Control 
+                  type='text' placeholder='Enter new username' name='username' 
+                  value={this.username} onChange={(e) => this.setUsername(e.target.vlaue)} />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Control
+                  type='password' placeholder='Enter new password' name='password' 
+                  value={this.password} onChange={(e) => this.setPassword(e.target.value)}  />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Control
+                  type='email' placeholder='Enter new email' name='email' 
+                  value={this.email} onChange={(e) => this.setEmail(e.target.value)}  />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Control
+                  type='date' placeholder='Enter new birthday' name='birthday' 
+                  value={this.birthday} onChange={(e) => this.setBirthday(e.target.value)}  />
+              </Form.Group>
+
+              <Button className='login-button' onClick={() => this.handleUpdate()}>UPDATE</Button>
+            </Card>
+
+            <Container>
+              <Card>
+                <h3>Favourite Movies</h3>
+                {favouriteMovies.map((movie) => {
+                 
+                 // LINE BELOW NOT WORKING 
+                  if (favouriteMovies.length === 0) return <p>There are no movies in your list.</p>;
+                  
+                  return (
+                    <Card key={movie._id} style={{width: '16rem'}}> 
+                      <Card.Img variant='top' src={movie.ImagePath} />
+                      <Card.Body>
+                        <Link to={`/movies/${movie._id}`}>
+                          <Button className='login-button' variant='link'>MORE INFO</Button>
+                        </Link>
+                        <Button className='login-button' variant='link' onClick={() => this.removeMovie(movie)}>REMOVE FROM</Button>
+                      </Card.Body>
+                    </Card>
+                  )
+                })}
+              </Card>
+            </Container> 
+
+          </CardGroup>
+        </Container>
+      </div>
     )
   }
+
 
 }
