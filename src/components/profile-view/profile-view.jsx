@@ -56,6 +56,7 @@ export class ProfileView extends React.Component {
 
   handleUpdate = (e) => {
 
+
     const user = localStorage.getItem('user'); 
     const token = localStorage.getItem('token'); 
 
