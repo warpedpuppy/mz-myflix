@@ -197,7 +197,7 @@ export class ProfileView extends React.Component {
                 {favouriteMovies.map((movie) => {
                  
                  // LINE BELOW NOT WORKING 
-                  if (favouriteMovies.length === 0) return <p>There are no movies in your list.</p>;
+                  // if (favouriteMovies.length === 0) return <p>There are no movies in your list.</p>;
                   
                   return (
                     <Card key={movie._id} style={{width: '16rem'}}> 
