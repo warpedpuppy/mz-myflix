@@ -118,7 +118,7 @@ export class ProfileView extends React.Component {
     })
     .then((response) => {
       this.setState({
-        favouriteMovies: response.data.favouriteMovies
+        favouriteMovies: response.data.FavouriteMovies
       });
     })
     .catch(function (error) {

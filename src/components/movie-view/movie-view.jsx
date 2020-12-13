@@ -1,11 +1,45 @@
 import React from 'react'; 
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import {Container, Grid, Row, Col} from 'react-bootstrap/Container';
 
+import {ProfileView} from '../profile-view/profile-view';
+
 export class MovieView extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      FavouriteMovies: []
+    };
+  }
+
+
+  addMovie(movie) {
+    const userId = localStorage.getItem('user');
+    const token = localStorage.getItem('token'); 
+
+    axios.post(`https://radiant-journey-16913.herokuapp.com/users/${userId}/movies/${movie._id}`, {  //movies/${movie._id}
+      // username: localStorage.getItem('user')},
+      // {
+        headers: {Authorization: `Bearer ${token}`},
+    })
+    .then((response) => {
+      this.setState({
+        favouriteMovies: response.data.FavouriteMovies
+      });
+      console.log(movie);
+      alert('Movie added to your favourites')
+    })
+    .catch(function(error) {
+      console.log(error);
+      alert('error adding movie to favourites')
+    })
+  }
 
   render () {
     const {movie} = this.props; //returnHome
@@ -34,6 +68,12 @@ export class MovieView extends React.Component {
           <span className='value'>{movie.Director.Name}</span>
         </div>
 
+        <div>
+          <Button className='movie-view-button' onClick={() => 
+          this.addMovie(movie)}>
+            ADD TO FAVOURITES
+          </Button>
+        </div>
         <div>
           <Link to={`/directors/${movie.Director.Name}`}>
             <Button className='movie-view-button' variant='link'>DIRECTOR</Button>          
