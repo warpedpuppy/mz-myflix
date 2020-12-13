@@ -22,10 +22,10 @@ export function RegistrationView(props) {
 
     if(isValid) {     
       axios.post('https://radiant-journey-16913.herokuapp.com/users', {
-        Username: username,
+        username: username,
         Password: password,
-        Email: email,
-        Birthday: birthday
+        email: email,
+        birthday: birthday
       })
       .then(response => {
         const data = response.data;

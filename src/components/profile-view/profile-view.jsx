@@ -11,17 +11,17 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super();
 
-  this.Username = undefined;
+  this.username = undefined;
   this.Password = undefined;
-  this.Email = undefined;
+  this.email = undefined;
 
   this.state = {
     user: null,
-    Username: '',
+    username: '',
     Password: '',
-    Email: '',
-    Birthday: null,
-    FavouriteMovies: []
+    email: '',
+    birthday: null,
+    favouriteMovies: []
     };
   }
 
@@ -40,11 +40,11 @@ export class ProfileView extends React.Component {
     })
     .then((response) => {
       this.setState({
-        username: response.data.Username,
+        username: response.data.username,
         password: response.data.Password,
-        email: response.data.Email,
-        birthday: response.data.Birthday,
-        favouriteMovies: response.data.FavouriteMovies
+        email: response.data.email,
+        birthday: response.data.birthday,
+        favouriteMovies: response.data.favouriteMovies
       });
     })
     .catch(function(error) {
@@ -61,10 +61,10 @@ export class ProfileView extends React.Component {
     const token = localStorage.getItem('token'); 
 
     axios.put(`https://radiant-journey-16913.herokuapp.com/users/${user}`, {
-      username: this.Username,
+      username: this.username,
       password: this.Password,
-      email: this.Email,
-      birthday: this.Birthday
+      email: this.email,
+      birthday: this.birthday
     },
     {
       headers: {Authorization: `Bearer ${token}`},
@@ -119,7 +119,7 @@ export class ProfileView extends React.Component {
     })
     .then((response) => {
       this.setState({
-        favouriteMovies: response.data.FavouriteMovies
+        favouriteMovies: response.data.favouriteMovies
       });
     })
     .catch(function (error) {
@@ -129,7 +129,7 @@ export class ProfileView extends React.Component {
   }
 
   setUsername(input) {
-    this.Username = input;
+    this.username = input;
   }
 
   setPassword(input) {
@@ -137,18 +137,18 @@ export class ProfileView extends React.Component {
   }
 
   setEmail(input) {
-    this.Email = input; 
+    this.email = input; 
   }
 
   setBirthday(input) {
-    this.Birthday = input;
+    this.birthday = input;
   }
 
   render() {
 
    const movies = this.props.movies;
-   const user = this.state.Username,
-         favouriteMovies = this.state.FavouriteMovies; 
+   const user = this.state.username,
+         favouriteMovies = this.state.favouriteMovies; 
 
     console.log(favouriteMovies);
 

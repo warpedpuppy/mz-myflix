@@ -14,7 +14,7 @@ export class MovieView extends React.Component {
     super();
 
     this.state = {
-      FavouriteMovies: []
+      favouriteMovies: []
     };
   }
 
@@ -30,7 +30,7 @@ export class MovieView extends React.Component {
     })
     .then((response) => {
       this.setState({
-        favouriteMovies: response.data.FavouriteMovies
+        favouriteMovies: response.data.favouriteMovies
       });
       console.log(movie);
       alert('Movie added to your favourites')
@@ -50,22 +50,22 @@ export class MovieView extends React.Component {
     return(
 
       <div className='movie-view'>
-        <img className='movie-poster' src= {movie.ImagePath} />
+        <img className='movie-poster' src= {movie.imagePath} />
         <div className='movie-title'>
           <span className='label'><h3>Title</h3> </span>
-          <span className='value'>{movie.Title}</span>
+          <span className='value'>{movie.title}</span>
         </div>
         <div className='movie-description'>
           <span className='label'><h3>Genre</h3> </span>
-          <span className='value'>{movie.Genre.Name}</span>
+          <span className='value'>{movie.genre.name}</span>
         </div>
         <div className='movie-genre'>
           <span className='label'><h3>Description</h3> </span>
-          <span className='value'>{movie.Description}</span>
+          <span className='value'>{movie.description}</span>
         </div>
         <div className='movie-director'>
           <span className='label'><h3>Director</h3> </span>
-          <span className='value'>{movie.Director.Name}</span>
+          <span className='value'>{movie.director.name}</span>
         </div>
 
         <div>
@@ -75,12 +75,12 @@ export class MovieView extends React.Component {
           </Button>
         </div>
         <div>
-          <Link to={`/directors/${movie.Director.Name}`}>
+          <Link to={`/directors/${movie.director.name}`}>
             <Button className='movie-view-button' variant='link'>DIRECTOR</Button>          
           </Link>
         </div>
         <div>
-          <Link to={`/genres/${movie.Genre.Name}`}>
+          <Link to={`/genres/${movie.genre.name}`}>
             <Button className='movie-view-button' variant='link'>GENRE</Button>
           </Link>
         </div>

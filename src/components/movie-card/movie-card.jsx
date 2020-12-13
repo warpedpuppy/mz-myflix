@@ -15,11 +15,11 @@ export class MovieCard extends React.Component {
       <Col> 
         <CardGroup style={{width: '24rem'}}>
           <Card>
-            <Card.Img variant='top' src={movie.ImagePath}/>
+            <Card.Img variant='top' src={movie.imagePath}/>
             <Card.Body>
-              <Card.Title>{movie.Title}</Card.Title>
-              <Card.Text>{movie.Description}</Card.Text>
-              <Link to={`/movies/${movie._id}`}>
+              <Card.Title>{movie.title}</Card.Title>
+              <Card.Text>{movie.movieDescription}</Card.Text>
+              <Link to={`/movies/${movie.id}`}>
                 <Button className='movie-card-button' variant='link'>OPEN</Button>
               </Link>
             </Card.Body>
@@ -30,11 +30,11 @@ export class MovieCard extends React.Component {
   }
 }
 
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired,
-  // onClick: PropTypes.func.isRequired
-};
+// MovieCard.propTypes = {
+//   movie: PropTypes.shape({
+//     Title: PropTypes.string.isRequired,
+//     Description: PropTypes.string.isRequired,
+//     ImagePath: PropTypes.string.isRequired
+//   }).isRequired,
+//   // onClick: PropTypes.func.isRequired
+// };
