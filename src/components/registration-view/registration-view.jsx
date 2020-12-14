@@ -77,7 +77,7 @@ export function RegistrationView(props) {
           setUsername(e.target.value)} />
         </Form.Label>
       </FormGroup>
-      <div style={{fontSize: 12, color: 'red'}}>{usernameError}</div>
+      {/* <div style={{fontSize: 12, color: 'red'}}>{usernameError}</div> */}
       
       <FormGroup>
         <Form.Label>
