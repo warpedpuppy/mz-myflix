@@ -1,3 +1,4 @@
+import Config from '../../config.js';
 import React, {useState} from 'react'; 
 import axios from 'axios'; 
 import PropTypes from 'prop-types'; 
@@ -35,7 +36,7 @@ export class ProfileView extends React.Component {
 
     const user = localStorage.getItem('user');
 
-    axios.get(`https://radiant-journey-16913.herokuapp.com/users/${user}`, {
+    axios.get(`${Config.LOCAL_API}/users/${user}`, { //REMOTE_API
       headers: {Authorization: `Bearer ${token}`},
     })
     .then((response) => {

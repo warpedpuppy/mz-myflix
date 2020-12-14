@@ -1,3 +1,4 @@
+import Config from '../../config.js';
 import React from 'react'; 
 import axios from 'axios'; 
 import {MovieCard} from '../movie-card/movie-card';
@@ -48,8 +49,7 @@ export class MainView extends React.Component {
 //  }
 
  getMovies(token) {
-   // axios.get('http://localhost:8080/movies')
-   axios.get('https://radiant-journey-16913.herokuapp.com/movies', {
+   axios.get('${Config.LOCAL_API}/movies', {  //REMOTE_API
      headers: { Authorization: `Bearer ${token}`}
    })
    .then(response => { //Assign the result to the state

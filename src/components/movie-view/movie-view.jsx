@@ -1,3 +1,4 @@
+import Config from '../../config.js';
 import React from 'react'; 
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -23,7 +24,7 @@ export class MovieView extends React.Component {
     const userId = localStorage.getItem('user');
     const token = localStorage.getItem('token'); 
 
-    axios.post(`https://radiant-journey-16913.herokuapp.com/users/${userId}/movies/${movie._id}`, {  //movies/${movie._id}
+    axios.post(`${Config.LOCAL_API}/users/${userId}/movies/${movie._id}`, {  //REMOTE_API
       // username: localStorage.getItem('user')},
       // {
         headers: {Authorization: `Bearer ${token}`},

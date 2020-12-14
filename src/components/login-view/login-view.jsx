@@ -1,3 +1,4 @@
+import Config from '../../config.js';
 import React, {useState} from 'react'; 
 import axios from 'axios';
 import{RegistrationView} from '../registration-view/registration-view';
@@ -20,7 +21,7 @@ export function LoginView(props) {
 
     // Send a request to the server for authentication
     if (isValid) {
-      axios.post('https://radiant-journey-16913.herokuapp.com/login', {
+      axios.post('${Config.LOCAL_API}/login', {  //REMOTE_API
         Username: username, /* test111 */
         Password: password  /* $test111 */   
       })

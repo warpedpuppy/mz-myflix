@@ -1,3 +1,4 @@
+import Config from '../../config.js';
 import React, {useState} from 'react'; 
 import axios from 'axios';
 import { 
@@ -21,7 +22,7 @@ export function RegistrationView(props) {
     // props.onLoggedIn(username);  // Why do I need this? Works fine without it
 
     if(isValid) {     
-      axios.post('https://radiant-journey-16913.herokuapp.com/users', {
+      axios.post('${Config.LOCAL_API}/users', {  //REMOTE_API
         username: username,
         Password: password,
         email: email,
