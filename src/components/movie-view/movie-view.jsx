@@ -24,7 +24,7 @@ export class MovieView extends React.Component {
     const userId = localStorage.getItem('user');
     const token = localStorage.getItem('token'); 
 
-    axios.post(`${Config.LOCAL_API}/users/${userId}/movies/${movie._id}`, {  //REMOTE_API
+    axios.post(`${Config.REMOTE_API}/users/${userId}/movies/${movie.id}`, {  //REMOTE_API  LOCAL_API
       // username: localStorage.getItem('user')},
       // {
         headers: {Authorization: `Bearer ${token}`},

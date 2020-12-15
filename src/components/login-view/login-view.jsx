@@ -21,7 +21,8 @@ export function LoginView(props) {
 
     // Send a request to the server for authentication
     if (isValid) {
-      axios.post('${Config.LOCAL_API}/login', {  //REMOTE_API
+      // axios.post('https://radiant-journey-16913.herokuapp.com/login', {
+      axios.post(`${Config.REMOTE_API}/login`, {  //REMOTE_API  LOCAL_API
         Username: username, /* test111 */
         Password: password  /* $test111 */   
       })

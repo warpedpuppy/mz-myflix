@@ -22,13 +22,13 @@ export class DirectorView extends React.Component {
 
       <div className='director-view'>
         <Container>
-          <div className='director-name'>{movie.Director.Name}</div>
-          <div className='director-bio'>{movie.Director.Bio}</div>
-          <div className='director-birth'>{movie.Director.Birth}</div>
-          <div className='director-death'>{movie.Director.Death}</div>
+          <div className='director-name'>{movie.director.name}</div>
+          <div className='director-bio'>{movie.director.bio}</div>
+          <div className='director-birth'>{movie.director.birth}</div>
+          <div className='director-death'>{movie.director.death}</div>
         </Container>
         <div>
-          <Link to = {`/movies/${movie._id}`}>
+          <Link to = {`/movies/${movie.id}`}>
             <Button className='back-button' variant='link'>BACK</Button>
           </Link>
         </div>

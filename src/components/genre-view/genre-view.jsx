@@ -20,10 +20,10 @@ export class GenreView extends React.Component {
     return (
       <div className= 'genre-view'>
         <Container>
-          <div className='genre-name'>{movie.Genre.Name}</div>
-          <div className='genre-description'>{movie.Genre.Description}</div>
+          <div className='genre-name'>{movie.genre.name}</div>
+          <div className='genre-description'>{movie.genre.description}</div>
           <Row>
-            <Link to = {`/movies/${movie._id}`}>
+            <Link to = {`/movies/${movie.id}`}>
               <Button className='back-button' variant='link'>BACK</Button>
             </Link>
           </Row>

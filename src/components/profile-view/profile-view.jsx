@@ -13,7 +13,7 @@ export class ProfileView extends React.Component {
     super();
 
   this.username = undefined;
-  this.Password = undefined;
+  this.password = undefined;
   this.email = undefined;
 
   this.state = {
@@ -36,13 +36,13 @@ export class ProfileView extends React.Component {
 
     const user = localStorage.getItem('user');
 
-    axios.get(`${Config.LOCAL_API}/users/${user}`, { //REMOTE_API
+    axios.get(`${Config.REMOTE_API}/users/${user}`, { //REMOTE_API  LOCAL_API
       headers: {Authorization: `Bearer ${token}`},
     })
     .then((response) => {
       this.setState({
         username: response.data.username,
-        password: response.data.Password,
+        password: response.data.password,
         email: response.data.email,
         birthday: response.data.birthday,
         favouriteMovies: response.data.favouriteMovies
@@ -63,7 +63,7 @@ export class ProfileView extends React.Component {
 
     axios.put(`https://radiant-journey-16913.herokuapp.com/users/${user}`, {
       username: this.username,
-      password: this.Password,
+      password: this.password,
       email: this.email,
       birthday: this.birthday
     },
@@ -115,7 +115,7 @@ export class ProfileView extends React.Component {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios.delete(`https://radiant-journey-16913.herokuapp.com/users/${user}/movies/${movie._id}`, {
+    axios.delete(`https://radiant-journey-16913.herokuapp.com/users/${user}/movies/${movie.id}`, {
       headers: {Authorization: `Bearer ${token}`}, 
     })
     .then((response) => {
@@ -202,20 +202,19 @@ export class ProfileView extends React.Component {
                   // if (favouriteMovies.length === 0) return <p>There are no movies in your list.</p>;
                   
                   return (
-                    <Card key={movie._id} style={{width: '16rem'}}> 
-                      <Card.Img variant='top' src={movie.ImagePath} />
+                    <Card key={movie.id} style={{width: '16rem'}}> 
+                      <Card.Img variant='top' src={movie.imagePath} />
                       <Card.Body>
-                        <Link to={`/movies/${movie._id}`}>
+                        <Link to={`/movies/${movie.id}`}>
                           <Button className='login-button' variant='link'>MORE INFO</Button>
                         </Link>
-                        <Button className='login-button' variant='link' onClick={() => this.removeMovie(movie)}>REMOVE FROM</Button>
+                        <Button className='login-button' variant='link' onClick={() => this.removeMovie(movie)}>REMOVE</Button>
                       </Card.Body>
                     </Card>
                   )
                 })}
               </Card>
             </Container> 
-
           </CardGroup>
         </Container>
       </div>
