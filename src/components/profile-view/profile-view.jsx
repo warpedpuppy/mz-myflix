@@ -61,7 +61,7 @@ export class ProfileView extends React.Component {
     const user = localStorage.getItem('user'); 
     const token = localStorage.getItem('token'); 
 
-    axios.put(`https://radiant-journey-16913.herokuapp.com/users/${user}`, {
+    axios.put(`${Config.REMOTE_API}/users/${user}`, {
       username: this.username,
       password: this.password,
       email: this.email,
@@ -88,7 +88,7 @@ export class ProfileView extends React.Component {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios.delete(`https://radiant-journey-16913.herokuapp.com/users/${user}`, {
+    axios.delete(`${Config.REMOTE_API}/users/${user}`, {
       headers: {Authorization: `Bearer ${token}`}, 
     })
     .then((response) => {
@@ -115,7 +115,7 @@ export class ProfileView extends React.Component {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios.delete(`https://radiant-journey-16913.herokuapp.com/users/${user}/movies/${movie.id}`, {
+    axios.delete(`${Config.REMOTE_API}/users/${user}/movies/${movie.id}`, {
       headers: {Authorization: `Bearer ${token}`}, 
     })
     .then((response) => {
