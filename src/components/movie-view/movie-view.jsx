@@ -24,21 +24,19 @@ export class MovieView extends React.Component {
     const userId = localStorage.getItem('user');
     const token = localStorage.getItem('token'); 
 
-    axios.post(`${Config.REMOTE_API}/users/${userId}/movies/${movie.id}`, {  //REMOTE_API  LOCAL_API
-      // username: localStorage.getItem('user')},
-      // {
-        headers: {Authorization: `Bearer ${token}`},
+    axios(`${Config.API_URL}/users/${userId}/movies/${movie.id}`, {  
+      method: 'POST', 
+      headers: {Authorization: `Bearer ${token}`}
     })
     .then((response) => {
       this.setState({
         favouriteMovies: response.data.favouriteMovies
       });
-      console.log(movie);
       alert('Movie added to your favourites')
     })
     .catch(function(error) {
       console.log(error);
-      alert('error adding movie to favourites')
+      // alert('error adding movie to favourites')
     })
   }
 

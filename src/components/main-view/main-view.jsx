@@ -15,7 +15,7 @@ import Button from 'react-bootstrap/Button';
 import {Container, Grid, Row, Col} from 'react-bootstrap/Container'
 import {Navbar} from 'react-bootstrap/Navbar';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export class MainView extends React.Component {
   
@@ -49,7 +49,7 @@ export class MainView extends React.Component {
 //  }
 
  getMovies(token) {
-   axios.get(`${Config.REMOTE_API}/movies`, {  //REMOTE_API  LOCAL_API
+   axios.get(`${Config.API_URL}/movies`, {  
      headers: { Authorization: `Bearer ${token}`}
    })
    .then(response => { //Assign the result to the state
