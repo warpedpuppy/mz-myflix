@@ -77,6 +77,7 @@ export class ProfileView extends React.Component {
     })
     .catch((e) => {
       console.log(e);
+      console.log('Error changing user info');
     });
   };
 
@@ -202,7 +203,7 @@ export class ProfileView extends React.Component {
                   
                   return (
                     <Card key={movie.id} style={{width: '16rem'}}> 
-                      <Card.Img variant='top' src={movie.imagePath} />
+                      <Card.Img key={movie.imagePath} variant='top' src={movie.imagePath} />
                       <Card.Body>
                         <Link to={`/movies/${movie.id}`}>
                           <Button className='login-button' variant='link'>MORE INFO</Button>

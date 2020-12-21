@@ -9,13 +9,18 @@ import {DirectorView} from '../director-view/director-view';
 import {GenreView} from '../genre-view/genre-view';
 import {ProfileView} from '../profile-view/profile-view';
 
+// import MoviesList from '../movies-list/movies-list';
+// import {setMovies} from '../../actions/actions'
+
 import PropTypes from 'prop-types';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import {Container, Grid, Row, Col} from 'react-bootstrap/Container'
 import {Navbar} from 'react-bootstrap/Navbar';
 
+import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+
 
 export class MainView extends React.Component {
   
@@ -26,6 +31,9 @@ export class MainView extends React.Component {
       selectedMovie: null,
       user: null
     };
+    // this.state = {
+    //   user: null
+    // };
   }
  
   // One of the hooks available in a React Component
@@ -56,6 +64,7 @@ export class MainView extends React.Component {
      this.setState({
        movies: response.data
      });
+    //  this.props.setMovies(response.data);
    })
    .catch(function (error) {
      console.log(error);
@@ -92,6 +101,10 @@ export class MainView extends React.Component {
 //  }
 
  render() {   
+
+  // let {movies} = this.props;
+  // let {user} = this.state;
+
   // If the state isn't initialized, this will throw on runtime before the data is initially loaded
   const {movies, selectedMovie, user} = this.state;
  
@@ -143,5 +156,12 @@ export class MainView extends React.Component {
     );
   }
 }
+
+// let mapStateToProps = state => {
+//   return {movies: state.movies}
+// }
+
+// export default connect(mapStateToProps, {setMovies})(MainView);
+
 
 
