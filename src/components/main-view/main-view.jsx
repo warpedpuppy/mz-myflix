@@ -71,6 +71,10 @@ export class MainView extends React.Component {
    });
  }
 
+ getFavouriteMoviesDetails = favouriteMovies => {
+  return this.state.movies.filter(movie => favouriteMovies.includes(movie.id));
+}
+
  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
  onLoggedIn(authData) {
    console.log(authData);
@@ -134,7 +138,7 @@ export class MainView extends React.Component {
           } />
           <Route path='/profile' render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            return <ProfileView/ >
+            return <ProfileView getFavouriteMoviesDetails={this.getFavouriteMoviesDetails} / >
           }
           } />
           <Route exact path='/movies/:movieId' render={

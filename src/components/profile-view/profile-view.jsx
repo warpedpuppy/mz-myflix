@@ -61,6 +61,7 @@ export class ProfileView extends React.Component {
     const token = localStorage.getItem('token'); 
 
     axios.put(`${Config.API_URL}/users/${user}`, {
+      user: this.user, 
       username: this.username,
       password: this.password,
       email: this.email,
@@ -72,7 +73,7 @@ export class ProfileView extends React.Component {
     .then((response) => {
       const data = response.data;
       localStorage.setItem('user', data.Username);
-      window.open('/users', '_self'); 
+      window.open('/profile', '_self'); 
       console.log('successful update');
     })
     .catch((e) => {
@@ -147,7 +148,7 @@ export class ProfileView extends React.Component {
 
   render() {
 
-   const movies = this.props.movies;
+   const {movies, getFavouriteMoviesDetails} = this.props;
    const user = this.state.username,
          favouriteMovies = this.state.favouriteMovies; 
 
@@ -189,20 +190,19 @@ export class ProfileView extends React.Component {
                   type='date' placeholder='Enter new birthday' name='birthday' 
                   value={this.birthday} onChange={(e) => this.setBirthday(e.target.value)}  />
               </Form.Group>
-
               <Button className='login-button' onClick={() => this.handleUpdate()}>UPDATE</Button>
             </Card>
 
             <Container>
               <Card>
                 <h3>Favourite Movies</h3>
-                {favouriteMovies.map((movie) => {
+                {getFavouriteMoviesDetails(favouriteMovies).map((movie, index)=> {
                  
                  // LINE BELOW NOT WORKING 
                   // if (favouriteMovies.length === 0) return <p>There are no movies in your list.</p>;
                   
                   return (
-                    <Card key={movie.id} style={{width: '16rem'}}> 
+                    <Card key={index} style={{width: '16rem'}}> 
                       <Card.Img key={movie.imagePath} variant='top' src={movie.imagePath} />
                       <Card.Body>
                         <Link to={`/movies/${movie.id}`}>
