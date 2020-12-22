@@ -17,10 +17,10 @@ export class ProfileView extends React.Component {
   // this.email = undefined;
   // this.birthday = undefined;
 
-  // this.username = null,
-  // this.password = null,
-  // this.email = null, 
-  // this.birthday = null
+  this.username = null,
+  this.password = null,
+  this.email = null, 
+  this.birthday = null
 
   this.state = {
     // user: null,
@@ -66,7 +66,9 @@ export class ProfileView extends React.Component {
 
   // UPDATE USER INFO ---------------------------------------------------------------
 
-  handleUpdate = ( newUsername, newPassword, newEmail, newBirthday) => {
+  handleUpdate = ( newUsername, newPassword, newEmail, newBirthday) => { //e
+
+    // e.preventDefault();
 
     const user = localStorage.getItem('user'); 
     const token = localStorage.getItem('token'); 
@@ -88,16 +90,16 @@ export class ProfileView extends React.Component {
     })
     .then(response => {
       const data = response.data;
-      localStorage.setItem('user', data.user); //data.username
-      window.open('/profile', '_self'); 
       console.log(data);
-      alert('Saved changes');
       this.setState({
         username: data.username,
         password: data.password,
         email: data.email,
         birthday: data.birthday
       })
+      localStorage.setItem('user', data.username); //data.username
+      window.open('/profile', '_self'); 
+      alert('Saved changes');
     })
     .catch((e) => {
       console.log(e);
