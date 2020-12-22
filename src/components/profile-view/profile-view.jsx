@@ -17,10 +17,10 @@ export class ProfileView extends React.Component {
   // this.email = undefined;
   // this.birthday = undefined;
 
-  this.username = null,
-  this.password = null,
-  this.email = null, 
-  this.birthday = null
+  // this.username = null,
+  // this.password = null,
+  // this.email = null, 
+  // this.birthday = null
 
   this.state = {
     // user: null,
@@ -29,10 +29,10 @@ export class ProfileView extends React.Component {
     // email: '',
     // birthday: null,
     // favouriteMovies: []
-    username: null, 
-    password: null, 
-    email: null, 
-    birthday: null, 
+    username: '', 
+    password: '', 
+    email: '', 
+    birthday: '', 
     favouriteMovies: []
     };
   }
@@ -66,18 +66,18 @@ export class ProfileView extends React.Component {
 
   // UPDATE USER INFO ---------------------------------------------------------------
 
-  handleUpdate = ( newUsername, newPassword, newEmail, newBirthday) => { //e
+  handleUpdate = (e) => { 
 
-    // e.preventDefault();
+    e.preventDefault();
 
     const user = localStorage.getItem('user'); 
     const token = localStorage.getItem('token'); 
 
     axios.put(`${Config.API_URL}/users/${user}`, {
-      username: newUsername ? newUsername: this.state.username,
-      password: newPassword ? newPassword: this.state.password,
-      email: newEmail ? newEmail: this.state.email,
-      birthday: newBirthday ? newBirthday: this.state.birthday
+      username: this.state.username,
+      password: this.state.password,
+      email: this.state.email,
+      birthday: this.state.birthday
       
       // user: this.user, 
       // username: this.username,
@@ -98,8 +98,8 @@ export class ProfileView extends React.Component {
         birthday: data.birthday
       })
       localStorage.setItem('user', data.username); //data.username
-      window.open('/profile', '_self'); 
-      alert('Saved changes');
+      // window.open('/profile', '_self'); 
+      // alert('Saved changes');
     })
     .catch((e) => {
       console.log(e);
@@ -155,31 +155,27 @@ export class ProfileView extends React.Component {
     console.log('movie removed from favourite movies')
   }
 
-  setUsername(input) {
-    this.username = input;
+  setUsername(username) {
+    this.setState({username})
   }
 
-  setPassword(input) {
-    this.password = input;
+  setPassword(password) {
+    this.setState({password})
   }
 
-  setEmail(input) {
-    this.email = input; 
+  setEmail(email) {
+    this.setState({email})
   }
 
-  setBirthday(input) {
-    this.birthday = input;
+  setBirthday(birthday) {
+    this.setState({birthday})
   }
 
   render() {
 
   //  const { username, password, email, birthday, favouriteMovies} = this.state;
    const {movies, getFavouriteMoviesDetails} = this.props;
-   const username = this.state.username,
-         password = this.state.password,
-         email = this.state.email,
-         birthday = this.state.birthday,
-         favouriteMovies = this.state.favouriteMovies; 
+   const {username, password, email, birthday, favouriteMovies} = this.state;
 
 
     console.log(favouriteMovies);
@@ -190,8 +186,8 @@ export class ProfileView extends React.Component {
         <Container>
           <CardGroup>
             <Card>
-              <h3>{this.state.username}</h3>
-              <h5>{this.state.email}</h5>
+              <h3>{username}</h3>
+              <h5>{email}</h5>
               <Button className='delete-button' onClick={() => this.handleDeregistering()}>DELETE ACCOUNT</Button>
             </Card>
 
@@ -200,29 +196,28 @@ export class ProfileView extends React.Component {
               <Form.Group>
                 <Form.Control 
                   type='text' placeholder='Enter new username' name='username' 
-                  value={this.username} onChange={(e) => this.setUsername(e.target.vlaue)} />
+                  value={username} onChange={(e) => this.setUsername(e.target.value)} />
               </Form.Group>
 
               <Form.Group>
                 <Form.Control
                   type='password' placeholder='Enter new password' name='password' 
-                  value={this.password} onChange={(e) => this.setPassword(e.target.value)}  />
+                  value={password} onChange={(e) => this.setPassword(e.target.value)}  />
               </Form.Group>
 
               <Form.Group>
                 <Form.Control
                   type='email' placeholder='Enter new email' name='email' 
-                  value={this.email} onChange={(e) => this.setEmail(e.target.value)}  />
+                  value={email} onChange={(e) => this.setEmail(e.target.value)}  />
               </Form.Group>
 
               <Form.Group>
                 <Form.Control
                   type='date' placeholder='Enter new birthday' name='birthday' 
-                  value={this.birthday} onChange={(e) => this.setBirthday(e.target.value)}  />
-              </Form.Group>
+                  onChange={(e) => this.setBirthday(e.target.value)}  />
+              </Form.Group> 
               
-              <Button type='submit' className='login-button' onClick={() => this.handleUpdate(
-                username, password, email, birthday)}>UPDATE</Button>
+              <Button type='submit' className='login-button' onClick={this.handleUpdate}>UPDATE</Button>
             </Card>
 
             <Container>
