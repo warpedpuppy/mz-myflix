@@ -10,18 +10,29 @@ import {Link} from 'react-router-dom';
 export class ProfileView extends React.Component {
 
   constructor(props) {
-    super();
+    super(props);
 
-  this.username = undefined;
-  this.password = undefined;
-  this.email = undefined;
+  // this.username = undefined;
+  // this.password = undefined;
+  // this.email = undefined;
+  // this.birthday = undefined;
+
+  // this.username = null,
+  // this.password = null,
+  // this.email = null, 
+  // this.birthday = null
 
   this.state = {
-    user: null,
-    username: '',
-    password: '',
-    email: '',
-    birthday: null,
+    // user: null,
+    // username: '',
+    // password: '',
+    // email: '',
+    // birthday: null,
+    // favouriteMovies: []
+    username: null, 
+    password: null, 
+    email: null, 
+    birthday: null, 
     favouriteMovies: []
     };
   }
@@ -39,7 +50,7 @@ export class ProfileView extends React.Component {
     axios.get(`${Config.API_URL}/users/${user}`, { 
       headers: {Authorization: `Bearer ${token}`},
     })
-    .then((response) => {
+    .then(response => {
       this.setState({
         username: response.data.username,
         password: response.data.password,
@@ -55,26 +66,38 @@ export class ProfileView extends React.Component {
 
   // UPDATE USER INFO ---------------------------------------------------------------
 
-  handleUpdate = (e) => {
+  handleUpdate = ( newUsername, newPassword, newEmail, newBirthday) => {
 
     const user = localStorage.getItem('user'); 
     const token = localStorage.getItem('token'); 
 
     axios.put(`${Config.API_URL}/users/${user}`, {
-      user: this.user, 
-      username: this.username,
-      password: this.password,
-      email: this.email,
-      birthday: this.birthday
+      username: newUsername ? newUsername: this.state.username,
+      password: newPassword ? newPassword: this.state.password,
+      email: newEmail ? newEmail: this.state.email,
+      birthday: newBirthday ? newBirthday: this.state.birthday
+      
+      // user: this.user, 
+      // username: this.username,
+      // password: this.password,
+      // email: this.email,
+      // birthday: this.birthday
     },
     {
       headers: {Authorization: `Bearer ${token}`},
     })
-    .then((response) => {
+    .then(response => {
       const data = response.data;
-      localStorage.setItem('user', data.Username);
+      localStorage.setItem('user', data.user); //data.username
       window.open('/profile', '_self'); 
-      console.log('successful update');
+      console.log(data);
+      alert('Saved changes');
+      this.setState({
+        username: data.username,
+        password: data.password,
+        email: data.email,
+        birthday: data.birthday
+      })
     })
     .catch((e) => {
       console.log(e);
@@ -148,9 +171,14 @@ export class ProfileView extends React.Component {
 
   render() {
 
+  //  const { username, password, email, birthday, favouriteMovies} = this.state;
    const {movies, getFavouriteMoviesDetails} = this.props;
-   const user = this.state.username,
+   const username = this.state.username,
+         password = this.state.password,
+         email = this.state.email,
+         birthday = this.state.birthday,
          favouriteMovies = this.state.favouriteMovies; 
+
 
     console.log(favouriteMovies);
 
@@ -190,7 +218,9 @@ export class ProfileView extends React.Component {
                   type='date' placeholder='Enter new birthday' name='birthday' 
                   value={this.birthday} onChange={(e) => this.setBirthday(e.target.value)}  />
               </Form.Group>
-              <Button className='login-button' onClick={() => this.handleUpdate()}>UPDATE</Button>
+              
+              <Button type='submit' className='login-button' onClick={() => this.handleUpdate(
+                this.username, this.password, this.email, this.birthday)}>UPDATE</Button>
             </Card>
 
             <Container>
