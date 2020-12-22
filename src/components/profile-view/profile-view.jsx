@@ -222,7 +222,7 @@ export class ProfileView extends React.Component {
               </Form.Group>
               
               <Button type='submit' className='login-button' onClick={() => this.handleUpdate(
-                this.username, this.password, this.email, this.birthday)}>UPDATE</Button>
+                username, password, email, birthday)}>UPDATE</Button>
             </Card>
 
             <Container>
