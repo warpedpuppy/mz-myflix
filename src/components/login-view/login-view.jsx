@@ -55,14 +55,14 @@ export function LoginView(props) {
     <Form className='login-form'>
       <FormGroup controlId='FormBasicUsername'>
         <Form.Label>
-          <Form.Control className='user-input' type='text' value={username} placeholder='Username' onChange = {e => 
+          <Form.Control className='user-input' type='text'  placeholder='Username' onChange = {e => 
           setUsername(e.target.value)} />
         </Form.Label>
       </FormGroup>
       
       <FormGroup controlId='FormBasicPassword'>
         <Form.Label>
-          <Form.Control className='password-input' type='password' value={password} placeholder='Password' onChange = {e => 
+          <Form.Control className='password-input' type='password' placeholder='Password' onChange = {e => 
           setPassword(e.target.value)} />
         </Form.Label>
       </FormGroup>
