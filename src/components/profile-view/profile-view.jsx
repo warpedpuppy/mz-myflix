@@ -55,7 +55,7 @@ export class ProfileView extends React.Component {
         username: response.data.username,
         password: response.data.password,
         email: response.data.email,
-        birthday: response.data.birthday,
+        birthday: this.truncate(response.data.birthday), 
         favouriteMovies: response.data.favouriteMovies
       });
     })
@@ -95,7 +95,7 @@ export class ProfileView extends React.Component {
         username: data.username,
         password: data.password,
         email: data.email,
-        birthday: data.birthday
+        birthday: this.truncate(data.birthday)
       })
       localStorage.setItem('user', data.username); //data.username
       // window.open('/profile', '_self'); 
@@ -171,6 +171,10 @@ export class ProfileView extends React.Component {
     this.setState({birthday})
   }
 
+  truncate (str) {
+    return str.substring(0, str.indexOf('T'))
+  }
+
   render() {
 
   //  const { username, password, email, birthday, favouriteMovies} = this.state;
@@ -196,25 +200,25 @@ export class ProfileView extends React.Component {
               <Form.Group>
                 <Form.Control 
                   type='text' placeholder='Enter new username' name='username' 
-                  value={username} onChange={(e) => this.setUsername(e.target.value)} />
+                  onChange={(e) => this.setUsername(e.target.value)} />
               </Form.Group>
 
               <Form.Group>
                 <Form.Control
                   type='password' placeholder='Enter new password' name='password' 
-                  value={password} onChange={(e) => this.setPassword(e.target.value)}  />
+                  onChange={(e) => this.setPassword(e.target.value)}  /> 
               </Form.Group>
 
               <Form.Group>
                 <Form.Control
                   type='email' placeholder='Enter new email' name='email' 
-                  value={email} onChange={(e) => this.setEmail(e.target.value)}  />
+                  onChange={(e) => this.setEmail(e.target.value)}  />
               </Form.Group>
 
               <Form.Group>
                 <Form.Control
                   type='date' placeholder='Enter new birthday' name='birthday' 
-                  onChange={(e) => this.setBirthday(e.target.value)}  />
+                  value={this.state.birthday} onChange={(e) => this.setBirthday(e.target.value)}  />
               </Form.Group> 
               
               <Button type='submit' className='login-button' onClick={this.handleUpdate}>UPDATE</Button>
