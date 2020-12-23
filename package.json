@@ -3,6 +3,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "components": "^0.1.0",
+    "devtools": "^6.10.11",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",

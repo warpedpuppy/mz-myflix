@@ -1,6 +1,9 @@
 import Config from '../../config.js';
 import React from 'react'; 
 import axios from 'axios'; 
+import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
 import {LoginView} from '../login-view/login-view';
@@ -8,9 +11,8 @@ import {RegistrationView} from '../registration-view/registration-view';
 import {DirectorView} from '../director-view/director-view';
 import {GenreView} from '../genre-view/genre-view';
 import {ProfileView} from '../profile-view/profile-view';
-
-// import MoviesList from '../movies-list/movies-list';
-// import {setMovies} from '../../actions/actions'
+import MoviesList from '../movies-list/movies-list';
+import {setMovies} from '../../actions/actions';
 
 import PropTypes from 'prop-types';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
@@ -18,22 +20,19 @@ import Button from 'react-bootstrap/Button';
 import {Container, Grid, Row, Col} from 'react-bootstrap/Container'
 import {Navbar} from 'react-bootstrap/Navbar';
 
-import {connect} from 'react-redux';
-import { Link } from 'react-router-dom';
-
 
 export class MainView extends React.Component {
   
   constructor() {
     super();
-    this.state = { // Initial state set to null
-      movies: [],
-      selectedMovie: null,
-      user: null
-    };
-    // this.state = {
+    // this.state = { // Initial state set to null
+    //   movies: [],
+    //   selectedMovie: null,
     //   user: null
     // };
+    this.state = {
+      user: null
+    };
   }
  
   // One of the hooks available in a React Component
@@ -61,10 +60,10 @@ export class MainView extends React.Component {
      headers: { Authorization: `Bearer ${token}`}
    })
    .then(response => { //Assign the result to the state
-     this.setState({
-       movies: response.data
-     });
-    //  this.props.setMovies(response.data);
+    //  this.setState({
+    //    movies: response.data
+    //  });
+     this.props.setMovies(response.data);
    })
    .catch(function (error) {
      console.log(error);
@@ -106,11 +105,11 @@ export class MainView extends React.Component {
 
  render() {   
 
-  // let {movies} = this.props;
-  // let {user} = this.state;
+  let {movies} = this.props;
+  let {user} = this.state;
 
   // If the state isn't initialized, this will throw on runtime before the data is initially loaded
-  const {movies, selectedMovie, user} = this.state;
+  // const {movies, selectedMovie, user} = this.state;
  
     // Before the movies have been loaded
     if (!movies) return <div className='main-view' />; 
@@ -132,7 +131,8 @@ export class MainView extends React.Component {
         </Link>
           <Route exact path='/' render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            return movies.map(m => <MovieCard key={m.id} movie={m} /> )
+            // return movies.map(m => <MovieCard key={m.id} movie={m} /> )
+              return <MoviesList movies={movies} />; 
           }} />
           <Route path='/register' render={() => <RegistrationView /> 
           } />
@@ -161,11 +161,11 @@ export class MainView extends React.Component {
   }
 }
 
-// let mapStateToProps = state => {
-//   return {movies: state.movies}
-// }
+let mapStateToProps = state => {
+  return {movies: state.movies}
+}
 
-// export default connect(mapStateToProps, {setMovies})(MainView);
+export default connect(mapStateToProps, {setMovies})(MainView);
 
 
 
