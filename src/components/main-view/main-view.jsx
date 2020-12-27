@@ -49,9 +49,6 @@ export class MainView extends React.Component {
      headers: { Authorization: `Bearer ${token}`}
    })
    .then(response => { //Assign the result to the state
-    //  this.setState({
-    //    movies: response.data
-    //  });
      this.props.setMovies(response.data);
    })
    .catch(function (error) {
@@ -84,26 +81,13 @@ export class MainView extends React.Component {
     });
   }
 
-
-//  returnHome = (e) => {
-//    e.preventDefault()
-//    this.setState({
-//      selectedMovie: undefined
-//    });
-//  }
-
  render() {   
 
   let {movies} = this.props;
   let {user} = this.state;
-
-  // If the state isn't initialized, this will throw on runtime before the data is initially loaded
-  // const {movies, selectedMovie, user} = this.state;
  
     // Before the movies have been loaded
     if (!movies) return <div className='main-view' />; 
-
-    // if (selectedMovie) return <MovieView returnHome={this.returnHome} movie={selectedMovie}/>
    
     return ( /*If the state of `selectedMovie` is not null, that selected movie will be returned. otherwise, all movies will be returned*/
       <Router>
@@ -120,7 +104,6 @@ export class MainView extends React.Component {
         </Link>
           <Route exact path='/' render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            // return movies.map(m => <MovieCard key={m.id} movie={m} /> )
               return <MoviesList movies={movies} />; 
           }} />
           <Route path='/register' render={() => <RegistrationView /> 

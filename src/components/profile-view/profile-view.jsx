@@ -12,23 +12,7 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
 
-  // this.username = undefined;
-  // this.password = undefined;
-  // this.email = undefined;
-  // this.birthday = undefined;
-
-  // this.username = null,
-  // this.password = null,
-  // this.email = null, 
-  // this.birthday = null
-
   this.state = {
-    // user: null,
-    // username: '',
-    // password: '',
-    // email: '',
-    // birthday: null,
-    // favouriteMovies: []
     username: '', 
     password: '', 
     email: '', 
@@ -78,12 +62,6 @@ export class ProfileView extends React.Component {
       password: this.state.password,
       email: this.state.email,
       birthday: this.state.birthday
-      
-      // user: this.user, 
-      // username: this.username,
-      // password: this.password,
-      // email: this.email,
-      // birthday: this.birthday
     },
     {
       headers: {Authorization: `Bearer ${token}`},
@@ -97,8 +75,7 @@ export class ProfileView extends React.Component {
         email: data.email,
         birthday: this.truncate(data.birthday)
       })
-      localStorage.setItem('user', data.username); //data.username
-      // window.open('/profile', '_self'); 
+      localStorage.setItem('user', data.username); 
       alert('Saved changes');
     })
     .catch((e) => {
@@ -177,10 +154,8 @@ export class ProfileView extends React.Component {
 
   render() {
 
-  //  const { username, password, email, birthday, favouriteMovies} = this.state;
    const {movies, getFavouriteMoviesDetails} = this.props;
    const {username, password, email, birthday, favouriteMovies} = this.state;
-
 
     console.log(favouriteMovies);
 

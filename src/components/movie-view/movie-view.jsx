@@ -36,7 +36,6 @@ export class MovieView extends React.Component {
     })
     .catch(function(error) {
       console.log(error);
-      // alert('error adding movie to favourites')
     })
   }
 
@@ -96,20 +95,20 @@ export class MovieView extends React.Component {
 }
 
 
-// MovieView.propTypes = {
-//   movie: PropTypes.shape({
-//     title: PropTypes.string.isRequired,
-//     description: PropTypes.string.isRequired,
-//     genre: PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       description: PropTypes.string
-//     }).isRequired,
-//     director: PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       bio: PropTypes.string.isRequired,
-//       birth: PropTypes.string,
-//       death: PropTypes.string
-//     }).isRequired,
-//     imagePath: PropTypes.string.isRequired
-//   }).isRequired,
-// };
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    genre: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string
+    }).isRequired,
+    director: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      bio: PropTypes.string.isRequired,
+      birth: PropTypes.string,
+      death: PropTypes.string
+    }).isRequired,
+    imagePath: PropTypes.string.isRequired
+  }).isRequired,
+};
