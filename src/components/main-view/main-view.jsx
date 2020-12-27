@@ -13,6 +13,7 @@ import {GenreView} from '../genre-view/genre-view';
 import {ProfileView} from '../profile-view/profile-view';
 import MoviesList from '../movies-list/movies-list';
 import {setMovies} from '../../actions/actions';
+import {setUser} from '../../actions/actions';
 
 import PropTypes from 'prop-types';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
@@ -25,13 +26,10 @@ export class MainView extends React.Component {
   
   constructor() {
     super();
-    // this.state = { // Initial state set to null
-    //   movies: [],
-    //   selectedMovie: null,
-    //   user: null
-    // };
+
     this.state = {
-      user: null
+      user: null,
+      movies: []
     };
   }
  
@@ -45,15 +43,6 @@ export class MainView extends React.Component {
      this.getMovies(accessToken);
    }
  }
-
- 
-
-//  When a movie is clicked, this function is called and updated the state of the SelectedMovie property to that movie
-//  onMovieClick(movie) {
-//    this.setState({
-//      selectedMovie: movie
-//    });
-//  }
 
  getMovies(token) {
    axios.get(`${Config.API_URL}/movies`, {  
@@ -71,8 +60,8 @@ export class MainView extends React.Component {
  }
 
  getFavouriteMoviesDetails = favouriteMovies => {
-  return this.state.movies.filter(movie => favouriteMovies.includes(movie.id));
-}
+   return this.state.movies.filter(movie => favouriteMovies.includes(movie.id));
+ }
 
  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
  onLoggedIn(authData) {
@@ -162,10 +151,10 @@ export class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return {movies: state.movies}
+  return {movies: state.movies, user: state.user}
 }
 
-export default connect(mapStateToProps, {setMovies})(MainView);
+export default connect(mapStateToProps, {setMovies, setUser})(MainView);
 
 
 
