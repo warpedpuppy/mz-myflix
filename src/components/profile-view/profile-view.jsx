@@ -157,7 +157,7 @@ export class ProfileView extends React.Component {
    const {movies, getFavouriteMoviesDetails} = this.props;
    const {username, password, email, birthday, favouriteMovies} = this.state;
 
-    console.log(favouriteMovies);
+    console.log(favouriteMovies, getFavouriteMoviesDetails(favouriteMovies));
 
     return (
 

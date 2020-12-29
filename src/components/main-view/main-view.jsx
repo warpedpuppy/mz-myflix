@@ -57,11 +57,11 @@ export class MainView extends React.Component {
  }
 
  getFavouriteMoviesDetails = favouriteMovies => {
-   return this.state.movies.filter(movie => favouriteMovies.includes(movie.id));
+   return this.props.movies.filter(movie => favouriteMovies.includes(movie.id));
  }
 
  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
- onLoggedIn(authData) {
+ onLoggedIn= authData => {
    console.log(authData);
    this.setState({
      user: authData.user.Username
@@ -103,6 +103,7 @@ export class MainView extends React.Component {
           >LOGOUT</Button>
         </Link>
           <Route exact path='/' render={() => {
+            console.log('user= ' ,user);
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
               return <MoviesList movies={movies} />; 
           }} />
