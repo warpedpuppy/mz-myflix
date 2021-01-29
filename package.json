@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "build": "parcel src/index.html",
+    "heroku-postbuild": "parcel build src/index.html"
+  },
   "dependencies": {
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
@@ -11,7 +16,8 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "parcel-bundler": "^<Version>"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
