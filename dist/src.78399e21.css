@@ -1,0 +1,133 @@
+* {
+  display: box;
+}
+
+.my-flix-title {
+  margin: auto;
+  text-align: center;
+  padding: 20px 0;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  color: #1030AD;
+}
+
+.login-form {
+  text-align: center;
+  padding: 15px;
+  margin: auto;
+}
+
+.user-input, .password-input {
+  width: 350px;
+}
+
+.login-button {
+  margin: 5px;
+  background-color: #1030AD;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  color: #FFCC00;
+  width: 160px;
+  border-style: 2px solid #FFCC00;
+}
+
+.back-button {
+  margin: 5px;
+  background-color: #1030AD;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  color: #FFCC00;
+  width: 160px;
+  border-style: 2px solid #FFCC00;
+}
+
+.back-button {
+  margin: 5px;
+  background-color: #1030AD;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  color: #FFCC00;
+  width: 200px;
+  border-style: 2px solid #FFCC00;
+}
+
+.back-button:hover {
+  text-decoration: none;
+  color: #FFCC00;
+}
+
+.register-button {
+  margin: 5px;
+  background-color: #FFCC00;
+  color: #1030AD;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  width: 160px;
+}
+
+.login-button:hover {
+  color: #FFCC00;
+  background-color: #1030AD;
+}
+
+.register-button:hover {
+  color: #1030AD;
+  background-color: #FFCC00;
+  text-decoration: none;
+}
+
+.nav-button {
+  color: #1030AD;
+  background-color: #FFCC00;
+  text-decoration: none;
+}
+
+.nav-button:hover {
+  text-decoration: none;
+}
+
+.movie-card-button {
+  margin: 5px;
+  background-color: #1030AD;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  color: #FFCC00;
+  width: 160px;
+}
+
+.movie-card-button:hover {
+  color: #FFCC00;
+  background-color: #1030AD;
+  text-decoration: none;
+}
+
+.movie-view {
+  text-align: center;
+  max-width: 36rem;
+  margin: auto;
+}
+
+.movie-poster {
+  max-width: 22rem;
+}
+
+.movie-view-button {
+  margin: 5px;
+  background-color: #1030AD;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  color: #FFCC00;
+  width: 160px;
+}
+
+.movie-view-button:hover {
+  color: #FFCC00;
+  background-color: #1030AD;
+  text-decoration: none;
+}
+
+.label {
+  color: #FFCC00;
+}
+
+/*# sourceMappingURL=/src.78399e21.css.map */
